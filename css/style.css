@@ -52,6 +52,8 @@
     height: calc(100vh - 456px);
     background-image: url(../img/mine.jpg);
     background-repeat: repeat;
+    overflow-y: scroll;
+    scrollbar-width: thin;
 }
 
 
@@ -71,4 +73,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+li{
+    list-style: none;
+    background-color: #d5f9ba;
+    line-height: 3rem;
+    border-radius: 20px;
+    margin: 2rem;
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 20px;
 }

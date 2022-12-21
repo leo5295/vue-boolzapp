@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.box{
+    background-color: white;
+    height: 500px;
+    margin: 2rem;
+}
+
+.outline{
+    outline: 1px solid grey;
+}
+
+.contacts{
+    width: 30%;
+}
+
+.chat{
+    background-color: blueviolet;
+    width: 70%;
+}
+
+.gradient{
+    background: rgb(0,150,136);
+    background: linear-gradient(rgba(0,150,136,1) 6%, rgba(0,150,136,1) 12%, rgba(220,219,209,1) 12%, rgb(255, 255, 255) 100%);
+    height: 100vh;
+}
+
+.header-wa{
+    height: 10px;
+}
+
+.top-contact{
+    height: 50px;
+    background-color: bisque;
+}
+
+.top-chat{
+    height: 50px;
+    background-color: bisque;
+}
+
+.img-avatar{
+    height: 30px;
+    border-radius: 50%;
+}
+
+.main-chat{
+    height: calc(100vh - 456px);
+    background-image: url(../img/mine.jpg);
+    background-repeat: repeat;
+}
+
+
+.fa-bell-slash{
+    color: #8edafc;
+}
+
+.bgc-color{
+    background-color: #8edafc;
+}
+
+.circle{
+    height: 50px;
+    width: 50px;
+    background-color: #fff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

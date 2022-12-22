@@ -50,10 +50,7 @@
 
 .main-chat{
     height: calc(100vh - 456px);
-    background-image: url(../img/mine.jpg);
-    background-repeat: repeat;
     overflow-y: scroll;
-    scrollbar-width: thin;
 }
 
 
@@ -86,4 +83,14 @@ li{
     justify-content: center;
     align-items: center;
     padding: 0px 20px;
+}
+img{
+    height: 40px;
+    border-radius: 50%;
+}
+
+.contacts-section{
+    height: calc(100vh - 600px);
+    overflow-y: scroll;
+    
 }

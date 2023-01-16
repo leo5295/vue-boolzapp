@@ -15,7 +15,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
         integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/luxon/3.1.1/luxon.min.js"
+        integrity="sha512-hZKz8wkgOcWeZanRioE6H6AC3OJspzJQyDBB5jLoZ1jIKbYDt5MwVIvU703WwE4sjvKZw9uNmmYlt29xKS27RA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head>
 
 <body class="gradient">
@@ -62,29 +64,50 @@
 
                             <!--contatti-->
                             <div class="contacts-section">
-                                <div v-for="(contact, index) in contacts" role="img" class="styler-chat">
-                                    <img :src="'./img/avatar'+contact.avatar+'.jpg'" alt="">
-                                    <span>{{contact.name}}</span>
-                                    <p>{{contact.messages[contact.messages.length -1].messages}}</p>
+                                <div id="profile-left" class=" h-100 bg-white">
 
+                                    <div class="bordbot" v-for="(item, index) in contactFind"
+                                        @click="selectedChat(index)" :class="(activeItem === index ) ? 'bg-gray' : '' ">
+                                        <div class="d-flex justify-content-between pe-1">
+                                            <div class="d-flex align-items-center p-2">
+                                                <img class="rounded-circle" :src="imgProfile(index)" alt="">
+                                                <div class="p-2">
+                                                    <h5>{{ contactFind[index].name }}</h5>
+                                                    <p class="fnt-small">{{
+                                                        contactFind[index].messages[contactFind[index].messages.length -
+                                                        1].message }}</p>
+
+                                                </div>
+                                            </div>
+                                            <div class="pt-3">{{item.messages[item.messages.length - 1].date.split('
+                                                ')[1]}}</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
                         </div>
+
                         <!--colonna DX Chat-->
 
-                        <!--chat-->
+                        <!--topchat-->
                         <div class="chat outline">
                             <div class="top-chat outline">
                                 <div class="top-contact outline d-flex justify-content-between align-items-center p-2">
-                                    <div>
-                                        <img class="img-avatar m-1" src="./img/avatar_1.jpg" alt="img">
-                                        <span class="name m-1">Sofia</span>
-                                    </div>
-                                    <div>
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                        <i class="fa-solid fa-paperclip"></i>
-                                        <i class="fa-solid fa-ellipsis-vertical m-1"></i>
+                                    <div
+                                        class="profile-pic col-profile d-flex justify-content-between align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <img class="rounded-circle" :src="imgProfile(activeItem)" alt="">
+                                            <div class="p-2 d-flex flex-column">
+                                                <div class="title">{{contacts[activeItem].name}}</div>
+                                                <div>Ultimo accesso alle 10:00</div>
+                                            </div>
+                                        </div>
+                                        <div class="notification">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                            <i class="fa-solid fa-paperclip"></i>
+                                            <i class="fa-solid fa-ellipsis-vertical"></i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -94,13 +117,23 @@
                             <div class="main-chat d-flex flex-row-reverse">
 
                                 <div class="text">
-                                    <ul class="unstyled-list">
-                                        <li v-for="(object, index) in todolist"
-                                            v-bind:class="(object.done === true) ? 'sbarrato' : ''"
-                                            @click="checkTask(index)">
-                                            {{object.text}}
-                                        </li>
-                                    </ul>
+                                    <div>
+                                        <ul class="list-unstyled">
+                                            <!-- Ciclo per stampare le chat di default-->
+                                            <li class="list-item d-flex flex-column"
+                                                v-for="(item, index) in contacts[activeItem].messages">
+                                                <div
+                                                    :class="(contacts[activeItem].messages[index].status == 'sent') ? 'sent' : 'received'">
+                                                    <div class="cursor d-flex align-items-center">
+                                                        {{ chatSendRec(index, activeItem) }}
+                                                        <i class="ms-5 fa-solid fa-chevron-down"></i>
+                                                        <div class="oa">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
 
                             </div>
@@ -111,9 +144,8 @@
                                 <div
                                     class="bottom top-contact outline d-flex justify-content-around align-items-center p-1">
                                     <i class="fa-regular fa-face-smile m-2"></i>
-                                    <input type="text" class="form-control" placeholder="Aggiungi una nuova task"
-                                        aria-label="Recipient's username" aria-describedby="button-addon2"
-                                        v-model="newTask" @keyup.enter="addTask">
+                                    <input type="text" placeholder="Scrivi un messaggio.." class="form-control"
+                                        v-model="newTask" @keyup.enter="enterMessage()">
                                     <i class="fa-solid fa-microphone m-2"></i>
                                 </div>
                             </div>
@@ -123,6 +155,7 @@
             </div>
         </div>
     </div>
+
     <!-- script-->
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script src="./js/script.js"></script>
